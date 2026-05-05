@@ -102,7 +102,7 @@ if days > 0:
 # ==========================================
 footer_html = f"""
 <div class="footer-container">
-<div class="made-with-love">Made with <span class="heart-symbol">❤️</span> by <b>Anuj Narang, JE PSPCL</b></div>
+<div class="made-with-love">Made with <span class="heart-symbol">❤️</span> by <b>Er. Anuj Narang, JE PSPCL</b></div>
 <div style="margin-bottom: 25px;">
 <a href="https://instagram.com/iamanujnarang" target="_blank"><img src="{INSTA_ICON}" class="social-icon"></a>
 <a href="https://facebook.com/iamanujnarang" target="_blank"><img src="{FB_ICON}" class="social-icon"></a>
@@ -117,6 +117,5 @@ footer_html = f"""
 </div>
 <div style="color: #94a3b8; font-size: 0.85rem; margin-top: 20px;">© 2026 | Supply Code 2024 Guidelines</div>
 </div>
-
 """
 st.markdown(footer_html, unsafe_allow_html=True)
