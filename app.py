@@ -7,7 +7,7 @@ import numpy as np
 # ==========================================
 st.set_page_config(page_title="PSPCL LDHF Calculator", page_icon="⚡", layout="centered")
 
-# Updated Assets Links
+# Assets Links
 PSPCL_LOGO_URL = "https://pspcl.in/assets/images/logo.png"
 BEECLUE_LOGO_PNG = "https://beeclue.com/wp-content/uploads/2026/02/b-horizontal-logo-w-2048x506.png"
 INSTA_ICON = "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
@@ -15,22 +15,22 @@ FB_ICON = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg
 X_ICON = "https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg"
 LINKEDIN_ICON = "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
 
-# Custom CSS
+# Custom CSS (Sab ek line mein ya zero indentation ke saath taaki code box na bane)
 st.markdown(f"""
 <style>
-    .main {{ background-color: #f8f9fa; }}
-    .logo-container {{ display: flex; justify-content: center; margin-bottom: 10px; }}
-    .title-container {{ text-align: center; margin-bottom: 30px; }}
-    .calc-card {{ background: white; padding: 25px; border-radius: 15px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); border: 1px solid #e6e6e6; margin-bottom: 20px; }}
-    .result-box {{ background-color: #f7fbff; border: 1px solid #dfefff; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center; }}
-    .footer-container {{ text-align: center; margin-top: 50px; padding: 40px 20px; border-top: 1px solid #eee; }}
-    .social-icon {{ width: 28px; margin: 0 12px; transition: transform 0.3s ease; display: inline-block; vertical-align: middle; }}
-    .social-icon:hover {{ transform: scale(1.2); }}
-    .beeclue-box {{ background: #0f172a; padding: 20px 30px; border-radius: 12px; display: inline-block; margin-top: 25px; border: 1px solid rgba(255, 255, 255, 0.1); }}
-    .beeclue-img {{ width: 170px; height: auto; display: block; margin: 0 auto; }}
-    .powered-text {{ color: #94a3b8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; font-weight: 600; }}
-    .made-with-love {{ font-size: 1.1rem; color: #1e293b; margin-bottom: 15px; font-weight: 500; }}
-    .heart-symbol {{ color: #e63946; }}
+.main {{ background-color: #f8f9fa; }}
+.logo-container {{ display: flex; justify-content: center; margin-bottom: 10px; }}
+.title-container {{ text-align: center; margin-bottom: 30px; }}
+.calc-card {{ background: white; padding: 25px; border-radius: 15px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); border: 1px solid #e6e6e6; margin-bottom: 20px; }}
+.result-box {{ background-color: #f7fbff; border: 1px solid #dfefff; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: center; }}
+.footer-container {{ text-align: center; margin-top: 50px; padding: 40px 20px; border-top: 1px solid #eee; }}
+.social-icon {{ width: 28px; margin: 0 12px; transition: transform 0.3s ease; display: inline-block; vertical-align: middle; }}
+.social-icon:hover {{ transform: scale(1.2); }}
+.beeclue-box {{ background: #0f172a; padding: 20px 30px; border-radius: 12px; display: inline-block; margin-top: 25px; border: 1px solid rgba(255, 255, 255, 0.1); }}
+.beeclue-img {{ width: 170px; height: auto; display: block; margin: 0 auto; }}
+.powered-text {{ color: #94a3b8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; font-weight: 600; }}
+.made-with-love {{ font-size: 1.1rem; color: #1e293b; margin-bottom: 15px; font-weight: 500; }}
+.heart-symbol {{ color: #e63946; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -71,6 +71,10 @@ with st.container():
     days = c3.number_input("D — Working days per month", min_value=0, value=def_d)
     hours = c4.number_input("H — Hours of use per day", min_value=0.0, max_value=24.0, value=float(def_h))
     
+    # Agriculture Note restoration
+    if cat_choice == "Agriculture Supply / AP High Tech":
+        st.info("Note: AP feeder = 4 hrs; Urban = 12 hrs.")
+    
     c5, c6 = st.columns([2, 1])
     f_val = c5.number_input("F — Demand factor", min_value=0.0, value=float(def_f), step=0.01)
     f_type = c6.radio("F Format", ["Decimal", "Percent"], horizontal=True)
@@ -94,7 +98,7 @@ if days > 0:
     st.success(f"Proportionate Units for {prop_days} days: **{prop_units:,.2f} kWh**")
 
 # ==========================================
-# 6. FOOTER & BRANDING (No-Indent Version to fix code-box issue)
+# 6. FOOTER & BRANDING (Strictly No Indentation)
 # ==========================================
 footer_html = f"""
 <div class="footer-container">
