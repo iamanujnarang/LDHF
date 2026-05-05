@@ -9,11 +9,10 @@ st.set_page_config(page_title="PSPCL LDHF Calculator", page_icon="⚡", layout="
 
 # Updated Assets Links
 PSPCL_LOGO_URL = "https://pspcl.in/assets/images/logo.png"
-# Use the direct PNG link for Beeclue
 BEECLUE_LOGO_PNG = "https://beeclue.com/wp-content/uploads/2026/02/b-horizontal-logo-w-2048x506.png"
 INSTA_ICON = "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
 FB_ICON = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg"
-X_ICON = "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" # Updated to LinkedIn Icon
+X_ICON = "https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg"
 LINKEDIN_ICON = "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
 
 # Custom CSS for UI/UX and Branding
@@ -21,7 +20,6 @@ st.markdown(f"""
 <style>
     .main {{ background-color: #f8f9fa; }}
     
-    /* Center the Logo */
     .logo-container {{
         display: flex;
         justify-content: center;
@@ -33,7 +31,6 @@ st.markdown(f"""
         margin-bottom: 30px;
     }}
 
-    /* Card Style */
     .calc-card {{
         background: white;
         padding: 25px;
@@ -43,7 +40,6 @@ st.markdown(f"""
         margin-bottom: 20px;
     }}
     
-    /* Results Box */
     .result-box {{
         background-color: #f7fbff;
         border: 1px solid #dfefff;
@@ -53,54 +49,57 @@ st.markdown(f"""
         text-align: center;
     }}
     
-    /* Footer Container */
     .footer-container {{
         text-align: center;
         margin-top: 50px;
         padding: 40px 20px;
         border-top: 1px solid #eee;
-        background-color: #ffffff;
     }}
 
-    /* Social Icons Styling */
     .social-icon {{
-        width: 32px;
-        margin: 0 10px;
+        width: 28px;
+        margin: 0 12px;
         transition: transform 0.3s ease;
         display: inline-block;
+        vertical-align: middle;
     }}
+    
     .social-icon:hover {{
         transform: scale(1.2);
     }}
 
-    /* Beeclue Tech Box */
     .beeclue-box {{
         background: #0f172a;
-        padding: 15px 25px;
+        padding: 20px 30px;
         border-radius: 12px;
         display: inline-block;
         margin-top: 25px;
         border: 1px solid rgba(255, 255, 255, 0.1);
     }}
+    
     .beeclue-img {{
-        width: 160px;
+        width: 170px;
         height: auto;
         display: block;
         margin: 0 auto;
     }}
+    
     .powered-text {{
         color: #94a3b8;
-        font-size: 0.65rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 8px;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+        font-weight: 600;
     }}
 
     .made-with-love {{
-        font-size: 1rem;
-        color: #334155;
-        margin-top: 20px;
+        font-size: 1.1rem;
+        color: #1e293b;
+        margin-bottom: 15px;
+        font-weight: 500;
     }}
+    
     .heart-symbol {{
         color: #e63946;
     }}
@@ -124,15 +123,15 @@ defaults = {
 }
 
 # ==========================================
-# 3. HEADER (Centered Logo & Clean Title)
+# 3. HEADER
 # ==========================================
 st.markdown(f"""
 <div class="logo-container">
     <img src="{PSPCL_LOGO_URL}" width="100">
 </div>
 <div class="title-container">
-    <h1 style="margin-bottom:0;">LDHF Calculator</h1>
-    <p style="color: #6b7280;">Official Assessment Method (PSPCL)</p>
+    <h1 style="margin-bottom:0; font-size: 2.2rem; color: #1e293b;">LDHF Calculator</h1>
+    <p style="color: #64748b; font-weight: 400;">Official Assessment Method (PSPCL)</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -178,7 +177,7 @@ monthly_units = load_kw * days * hours * actual_f
 st.markdown('<div class="result-box">', unsafe_allow_html=True)
 display_units = monthly_units / 1000 if u_format == "×10³ kWh" else monthly_units
 st.subheader(f"Monthly Units: {display_units:,.2f} {u_format.split(' ')[0]}")
-st.write(f"**Breakdown:** {load_kw}L × {days}D × {hours}H × {actual_f}F")
+st.write(f"**Formula:** {load_kw}L × {days}D × {hours}H × {actual_f}F")
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Proportionate Calculator
@@ -194,9 +193,14 @@ if days > 0:
 # ==========================================
 st.markdown(f"""
 <div class="footer-container">
+    <div class="made-with-love">
+        Made with <span class="heart-symbol">❤️</span> by <b>Anuj Narang, JE PSPCL</b>
+    </div>
+
     <div style="margin-bottom: 25px;">
         <a href="https://instagram.com/iamanujnarang" target="_blank"><img src="{INSTA_ICON}" class="social-icon"></a>
         <a href="https://facebook.com/iamanujnarang" target="_blank"><img src="{FB_ICON}" class="social-icon"></a>
+        <a href="https://x.com/iamanujnarang" target="_blank"><img src="{X_ICON}" class="social-icon"></a>
         <a href="https://linkedin.com/in/iamanujnarang" target="_blank"><img src="{LINKEDIN_ICON}" class="social-icon"></a>
     </div>
 
@@ -207,11 +211,7 @@ st.markdown(f"""
         </a>
     </div>
 
-    <div class="made-with-love">
-        Made with <span class="heart-symbol">❤️</span> by <b>Anuj Narang, JE PSPCL</b>
-    </div>
-
-    <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 10px;">
+    <div style="color: #94a3b8; font-size: 0.85rem; margin-top: 20px; font-weight: 400;">
         © 2026 | Supply Code 2024 Guidelines
     </div>
 </div>
