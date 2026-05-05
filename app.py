@@ -101,6 +101,21 @@ if days > 0:
 # 6. FOOTER & BRANDING (Strictly No Indentation)
 # ==========================================
 footer_html = f"""
-<div class="made-with-love">Made with <span class="heart-symbol">❤️</span> by <b>Anuj Narang, JE PSPCL</b></div> <div style="margin-bottom: 25px;"> <a href="https://instagram.com/iamanujnarang" target="_blank"><img src="{INSTA_ICON}" class="social-icon"></a> <a href="https://facebook.com/iamanujnarang" target="_blank"><img src="{FB_ICON}" class="social-icon"></a> <a href="https://x.com/iamanujnarang" target="_blank"><img src="{X_ICON}" class="social-icon"></a> <a href="https://linkedin.com/in/iamanujnarang" target="_blank"><img src="{LINKEDIN_ICON}" class="social-icon"></a> </div> <div class="beeclue-box"> <div class="powered-text">In Strategic Collaboration with</div> <a href="https://beeclue.com" target="_blank"> <img src="{BEECLUE_LOGO_PNG}" class="beeclue-img"> </a> </div> <div style="color: #94a3b8; font-size: 0.85rem; margin-top: 20px;">© 2026 | Supply Code 2024 Guidelines</div> </div>
+<div class="footer-container">
+<div class="made-with-love">Made with <span class="heart-symbol">❤️</span> by <b>Anuj Narang, JE PSPCL</b></div>
+<div style="margin-bottom: 25px;">
+<a href="https://instagram.com/iamanujnarang" target="_blank"><img src="{INSTA_ICON}" class="social-icon"></a>
+<a href="https://facebook.com/iamanujnarang" target="_blank"><img src="{FB_ICON}" class="social-icon"></a>
+<a href="https://x.com/iamanujnarang" target="_blank"><img src="{X_ICON}" class="social-icon"></a>
+<a href="https://linkedin.com/in/iamanujnarang" target="_blank"><img src="{LINKEDIN_ICON}" class="social-icon"></a>
+</div>
+<div class="beeclue-box">
+<div class="powered-text">In Strategic Collaboration with</div>
+<a href="https://beeclue.com" target="_blank">
+<img src="{BEECLUE_LOGO_PNG}" class="beeclue-img">
+</a>
+</div>
+<div style="color: #94a3b8; font-size: 0.85rem; margin-top: 20px;">© 2026 | Supply Code 2024 Guidelines</div>
+</div>
 """
 st.markdown(footer_html, unsafe_allow_html=True)
