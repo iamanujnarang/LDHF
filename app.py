@@ -14,7 +14,7 @@ X_ICON = "https://upload.wikimedia.org/wikipedia/commons/b/b7/X_logo.jpg"
 LINKEDIN_ICON = "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
 
 # ==========================================
-# 2. CSS STYLING
+# 2. CSS STYLING (Fixed for Streamlit)
 # ==========================================
 st.markdown("""
 <style>
@@ -22,11 +22,10 @@ st.markdown("""
     .top-logo-container {
         display: flex;
         justify-content: center;
-        margin-top: -30px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
     .top-logo {
-        width: 140px;
+        width: 120px;
     }
 
     /* Card & UI */
@@ -40,21 +39,22 @@ st.markdown("""
         margin-bottom: 20px;
     }
     .result-box {
-        background-color: #f0f7ff;
-        border: 1px solid #cce3ff;
-        padding: 20px;
-        border-radius: 12px;
-        margin-top: 20px;
-        text-align: center;
+        background-color: #f7fbff;
+        border: 1px solid #dfefff;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 15px;
     }
 
-    /* Footer Styles */
+    /* Footer Layout */
     .footer-container {
         text-align: center;
-        margin-top: 60px;
-        padding: 40px 10px;
+        margin-top: 50px;
+        padding: 40px 20px;
         border-top: 1px solid #eee;
     }
+
+    /* Made with Love */
     .made-with-love {
         font-size: 1.2rem;
         color: #334155;
@@ -71,47 +71,56 @@ st.markdown("""
         50% { transform: scale(1.2); }
         100% { transform: scale(1); }
     }
+
+    /* Social Icons */
     .social-icon {
         width: 38px;
-        margin: 0 10px;
-        transition: transform 0.3s ease;
+        margin: 0 12px;
+        transition: all 0.4s ease;
     }
     .social-icon:hover {
         transform: scale(1.3) translateY(-5px);
+        filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
     }
+
+    /* Beeclue Box */
     .beeclue-box {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        padding: 25px 40px;
+        padding: 20px 40px;
         border-radius: 15px;
         display: inline-block;
         margin-top: 30px;
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .beeclue-img {
-        width: 200px;
+        width: 180px;
         height: auto;
     }
     .powered-text {
         color: #94a3b8;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 2px;
-        margin-bottom: 12px;
-        font-weight: 500;
+        margin-bottom: 10px;
     }
     .copyright {
         color: #94a3b8;
         font-size: 0.8rem;
-        margin-top: 20px;
+        margin-top: 15px;
     }
 </style>
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 3. HEADER
+# 3. TOP LOGO
 # ==========================================
-st.markdown(f'<div class="top-logo-container"><img src="{PSPCL_LOGO_URL}" class="top-logo"></div>', unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center; margin-bottom: 0;'>LDHF Calculator</h1>", unsafe_allow_html=True)
+st.markdown(f"""
+<div class="top-logo-container">
+    <img src="{PSPCL_LOGO_URL}" class="top-logo">
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<h1 style='text-align: center;'>LDHF Calculator</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #666;'>Standard Assessment Method (Annexure-7)[cite: 1]</p>", unsafe_allow_html=True)
 
 # ==========================================
@@ -122,51 +131,60 @@ defaults = {
     "Non-continuous process industry": {"D": 25, "H": 16, "F": 0.60},
     "Single shift industry": {"D": 30, "H": 8, "F": 0.60},
     "Domestic": {"D": 30, "H": 8, "F": 0.30},
-    "Agriculture Supply": {"D": 30, "H": 12, "F": 1.00},
+    "Agriculture Supply / AP High Tech": {"D": 30, "H": 12, "F": 1.00},
     "Non-Residential (continuous)": {"D": 30, "H": 20, "F": 0.40},
     "Non-Residential (general)": {"D": 25, "H": 12, "F": 0.40},
     "Bulk Supply": {"D": 30, "H": 8, "F": 0.40},
     "Public lighting": {"D": 30, "H": 8, "F": 0.40},
+    "Other / Temporary": {"D": 30, "H": 12, "F": 0.60}
 }
 
 with st.container():
     st.markdown('<div class="calc-card">', unsafe_allow_html=True)
-    c1, c2 = st.columns(2)
-    with c1:
-        l = st.number_input("L — Load (kW)", min_value=0.0, value=10.0)
-    with c2:
+    col1, col2 = st.columns(2)
+    with col1:
+        load_kw = st.number_input("L — Load (kW)", min_value=0.0, value=10.0)
+    with col2:
         cat = st.selectbox("Category", list(defaults.keys()))
-    
-    c3, c4 = st.columns(2)
-    with c3:
-        d = st.number_input("D — Working Days", value=defaults[cat]["D"])
-    with c4:
-        h = st.number_input("H — Hours/Day", value=float(defaults[cat]["H"]))
-    
-    f = st.number_input("F — Demand Factor", value=float(defaults[cat]["F"]))
+
+    col3, col4 = st.columns(2)
+    with col3:
+        days = st.number_input("D — Working Days", value=defaults[cat]["D"])
+    with col4:
+        hours = st.number_input("H — Hours/Day", value=float(defaults[cat]["H"]))
+
+    f_val = st.number_input("F — Demand Factor", value=float(defaults[cat]["F"]))
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Monthly Calculation[cite: 1]
-units = l * d * h * f
-st.markdown(f'<div class="result-box"><h3>Estimated Units: {units:,.2f} kWh</h3></div>', unsafe_allow_html=True)
+# Result
+monthly_units = load_kw * days * hours * f_val
+st.markdown(f"""
+<div class="result-box">
+    <h3>Monthly Units: {monthly_units:,.2f} kWh</h3>
+    <small>Calculation: {load_kw} * {days} * {hours} * {f_val}</small>
+</div>
+""", unsafe_allow_html=True)
 
 # ==========================================
-# 5. FOOTER (Branding Fix)
+# 5. FOOTER (Branding Fixed)
 # ==========================================
-# Using a clean triple-quote block to avoid string parsing issues
-footer_html = f"""
+st.markdown(f"""
 <div class="footer-container">
+    
+    <!-- 1. Made with Love (Now at Top) -->
     <div class="made-with-love">
         Made with <span class="heart-symbol">❤️</span> by <b>Anuj Narang, JE PSPCL</b>
     </div>
-    
-    <div style="margin-bottom: 25px;">
+
+    <!-- 2. Social Icons -->
+    <div style="margin-bottom: 20px;">
         <a href="https://instagram.com/iamanujnarang" target="_blank"><img src="{INSTA_ICON}" class="social-icon"></a>
         <a href="https://facebook.com/iamanujnarang" target="_blank"><img src="{FB_ICON}" class="social-icon"></a>
         <a href="https://x.com/iamanujnarang" target="_blank"><img src="{X_ICON}" class="social-icon"></a>
         <a href="https://linkedin.com/in/iamanujnarang" target="_blank"><img src="{LINKEDIN_ICON}" class="social-icon"></a>
     </div>
 
+    <!-- 3. Beeclue Box -->
     <div class="beeclue-box">
         <div class="powered-text">In Strategic Collaboration with</div>
         <a href="https://beeclue.com" target="_blank">
@@ -177,6 +195,6 @@ footer_html = f"""
     <div class="copyright">
         © 2026 Official Annexure-7 Standard Implementation[cite: 1]
     </div>
+
 </div>
-"""
-st.markdown(footer_html, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
